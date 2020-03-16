@@ -1,0 +1,36 @@
+{% load crispy_forms_tags %}
+  
+
+<div class="row container-fluid mt-5">
+  <div class="col-lg-12">
+    <p class="text-center">
+      <h2 class="font-weight-light font-italic text-center ">mimilondonglamour.com</h2> 
+    </p>
+    
+  </div>
+</div>
+
+  <div class="row container-fluid mt-5">
+  
+    <div class="col-lg-3"></div>
+    <div class="col-lg-6">
+      
+  <form action="" method="POST" enctype="multipart/form-data">
+         {% csrf_token %}
+      {{form|crispy}}
+      <button type="submit" class="btn btn-info">
+          Submit
+      </button>
+  </form>
+    </div>
+    <div class="col-lg-3"></div>
+  </div>
+
+
+  
+
+
+  
+
+  
+  

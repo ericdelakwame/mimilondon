@@ -1,0 +1,155 @@
+{% extends 'accounts/base.html' %}
+{% load crispy_forms_tags %}
+
+
+{% block title %}
+  Sign in to continue
+{% endblock title %}
+  
+
+
+{% block heading %}
+  Sign in to continue
+{% endblock heading %}
+  
+
+{% block content %}
+    <div class="site-blocks-cover inner-page overlay" style="background-image: url(/static/home/images/b4.webp);" data-aos="fade" data-stellar-background-ratio="0.5">
+      <div class="row align-items-center justify-content-center">
+        <div class="col-md-5 text-center" data-aos="fade">
+          <h3 class="text-uppercase text-white">Sign In To Continue</h3>
+          <span class="caption d-block text-white">mimilondonglamour.com<a href="#">  One stop shop</a></span>
+        </div>
+      </div>
+    </div>  
+
+    <div class="slant-1"></div>
+
+    
+    
+  <div class="site-section first-section" data-aos="fade">
+      <div class="container">
+        <div class="row">
+       
+          <div class="col-md-12 col-lg-8 mb-5">
+          
+            
+          
+            <form action="#" class="p-5 bg-white" method="POST">
+              {% csrf_token %}
+
+              <div class="row form-group">
+                <div class="col-md-12 mb-3 mb-md-0">
+                  {{form|crispy}}
+                </div>
+              </div>
+             
+
+              <div class="row form-group">
+                <div class="col-md-12">
+                  <input type="submit" value="Sign In" class="btn btn-primary text-white px-4 py-2">
+                </div>
+              </div>
+
+  
+            </form>
+          </div>
+
+          <div class="col-lg-4">
+            <div class="p-4 mb-3 bg-white">
+              <h3 class="h5 text-black mb-3">Contact Info</h3>
+              <p class="mb-0 font-weight-bold">Address</p>
+              <p class="mb-4">Camberwell, South london, UK</p>
+
+              <p class="mb-0 font-weight-bold">Phone</p>
+              <p class="mb-4"><a href="#">+44</a></p>
+
+              <p class="mb-0 font-weight-bold">Email Address</p>
+              <p class="mb-0"><a href="#">mimilondonglamour@gmail.com</a></p>
+
+            </div>
+            
+            
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="site-section bg-dark block-14 nav-direction-white">
+
+      <div class="container">
+        
+        <div class="row mb-5">
+          <div class="col-md-12">
+            <h2 class="site-section-heading text-center text-white text-uppercase">Sign In To See More</h2>
+          </div>
+        </div>
+
+        <div class="nonloop-block-14 owl-carousel">
+          
+          
+            <div class="d-block block-testimony mx-auto text-center">
+              <div class="person w-25 mx-auto mb-4">
+                <img src="/static/home/images/men1.png" alt="Image" class="img-fluid rounded-circle w-25 mx-auto">
+              </div>
+              <div>
+                <h2 class="h5 mb- text-white4 text-white">Men</h2>
+                <blockquote class="text-white">&ldquo;New Trends For All Seasons For Men&rdquo;</blockquote>
+              </div>
+          </div>
+          
+            <div class="d-block block-testimony mx-auto text-center">
+              <div class="person w-25 mx-auto mb-4">
+                <img src="/static/home/images/person_7.jpg" alt="Image" class="img-fluid rounded-circle w-25 mx-auto">
+              </div>
+              <div>
+                <h2 class="h5 mb-4 text-white">Women</h2>
+                <blockquote class="text-white">&ldquo;Latest In Womens Wear&rdquo;</blockquote>
+              </div>
+          </div>
+          
+            <div class="d-block block-testimony mx-auto text-center">
+              <div class="person w-25 mx-auto mb-4">
+                <img src="/static/home/images/accessories1.png" alt="Image" class="img-fluid rounded-circle w-25 mx-auto">
+              </div>
+              <div>
+                <h2 class="h5 mb-4 text-white">Accessories</h2>
+                <blockquote class="text-white">&ldquo;Top Notch Accessories For Him And her&rdquo;</blockquote>
+              </div>
+          </div>
+          
+            <div class="d-block block-testimony mx-auto text-center">
+              <div class="person w-25 mx-auto mb-4">
+                <img src="/static/home/images/children1.png" alt="Image" class="img-fluid rounded-circle w-25 mx-auto">
+              </div>
+              <div>
+                <h2 class="h5 mb-4 text-white">Children</h2>
+                <blockquote class="text-white">&ldquo;Comfortable And Stylish &rdquo;</blockquote>
+              </div>
+          </div>
+
+        </div>
+
+      </div>
+      
+    </div>
+
+    <div class="py-5 bg-primary">
+      <div class="container">
+        <div class="row align-items-center justify-content-center">
+          <div class="col-md-6 text-center mb-3 mb-md-0">
+            <h2 class="text-uppercase text-white mb-4">mimilondonglamour.com</h2>
+            <a href="{% url 'home:index' %}" class="btn btn-bg-primary font-secondary text-uppercase">Home</a>
+          </div>
+        </div>
+      </div>
+    </div>  
+{% endblock content %}
+    
+
+{% block footer %}
+  
+{% endblock footer %}
+  
+
+  

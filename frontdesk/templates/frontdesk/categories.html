@@ -1,0 +1,78 @@
+{% extends 'frontdesk/base.html' %}
+{% load crispy_forms_tags %}
+
+
+{% block title %}
+    
+{% endblock title %}
+    
+
+
+{% block heading %}
+    
+{% endblock heading %}
+
+
+
+{% block content %}
+
+<div class="row">
+    <div class="col-lg-4">
+        
+        {% if categories %}
+            <h3 class="alert alert-light text-center">Categories</h3>
+            <ul class="list-unstyled">
+                
+                {% for category in categories %}
+                    <li class="h3 mt-4"><a class="text-info" href="">Category: {{category.name|capfirst}}</a></li>
+                    
+                    {% if category.subcategories %}
+                    <h5 class="alert alert-light">{{category.subcategories.count}} Sub categories</h5>
+                    <ul class="list-unstyled">
+                    {% for sub in category.subcategories.all %}
+                        <li class="mt-4"><a class="alert alert-light h3 text-success"  href="">{{sub.name|capfirst}}</a></li>
+
+                        <li class="mt-4"><a class="btn btn-light btn-outline-dark" href="{% url 'frontdesk:new_product' sub.pk %}">Add a new item to {{sub.name|capfirst}}</a></li>
+                    {% endfor %}
+                    </ul>
+                    
+                   
+                        
+                        
+                    {% endif %}
+                        
+                {% endfor %}
+                    
+            </ul>
+        {% endif %}
+    
+            
+    </div>
+    <div class="col-lg-8">
+        
+        {% if form %}
+            <h3 class="alert alert-light">
+                Add an item to {{subcategory.name}}
+            </h3>
+            <div class="container jumbotron">
+                <form action="" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{form|crispy}}
+                <p class="text-center">
+                    <button type="submit" class="btn btn-info btn-lg">Add item</button>
+                </p>
+            </form>
+            </div>
+        {% endif %}           
+
+    </div>
+</div>
+    
+{% endblock content %}
+
+
+
+{% block footer %}
+    
+{% endblock footer %}
+    

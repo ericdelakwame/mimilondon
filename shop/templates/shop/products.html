@@ -1,0 +1,89 @@
+{% extends 'shop/base.html' %}
+
+
+
+
+{% block title %}
+Products    
+{% endblock title %}
+
+
+
+{% block content %}
+ <div class="container-fluid  row">
+{% for product in products %}
+
+    <div id="prow" class="col-lg-4 col-md-6 col-sm-6 d-block">
+                
+                {% if product.image %}
+                <p class="text-center">
+                <a href="{{product.get_absolute_url}}">
+                     
+                    <img src="{{product.image.url}}" alt="" width="60%" height="300px">
+                </a>
+                </p>
+                   
+                {% endif %}
+                    
+           
+            
+                <div class="container">
+                    <!-- <h5 class="alert alert-heading text-center">
+                         {{product.sub_category.category.name|capfirst}}/ {{product.sub_category.name|capfirst}} 
+                    </h5> -->
+                    <h5 class="text-center">
+                        {{product.name|capfirst}}
+                    </h5>
+                    
+                    {% if product.colors %}
+                    <h5 class="alert alert- text-center">
+                        Colors
+                    </h5>
+                    {% for c in product.colors.all %}
+                      <nav >
+                        <li class="breadcrumb-item text-center font-weight-light">
+                            {{c.color|capfirst}},
+                        </li>
+                    </nav>
+                    {% endfor %}           
+                    {% endif %}
+
+                      {% if product.sizes %}
+                    <h5 class="alert alert-heading text-center">
+                        Sizes
+                    </h5>
+                    {% for p in product.sizes.all %}
+                    <nav >
+                        <li class="breadcrumb-item text-center font-weight-light">
+                            {{p.size|capfirst}},
+                        </li>
+                    </nav>
+                        
+                    {% endfor %}           
+                    {% endif %}
+
+                    
+                    <h5 class="text-center">$ {{product.price}}</h5>
+                    <h5 class="text-center">Stock: {{product.stock}}</h5>
+                    <p class="text-center">
+                        <a class="btn btn-light btn-outline-dark" href="{% url 'shop:product_detail' product.id %}">View</a>
+                    </p>
+                    
+                </div>
+                
+    </div>
+    
+{% endfor %}
+  </div>
+
+
+
+    
+{% endblock content %}
+    
+    
+
+{% block footer %}
+    
+{% endblock footer %}
+    

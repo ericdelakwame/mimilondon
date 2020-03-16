@@ -1,0 +1,95 @@
+{% extends 'shop/base.html' %}
+{% load crispy_forms_tags %}
+
+
+{% block title %}
+mimilonglamour
+{% endblock title %}
+
+
+
+
+{% block content %}
+
+{% if product %}
+<div class="row container-fluid">
+    <div class="col-lg-6">
+
+        {% if product.image %}
+        <p>
+            <img src="{{product.image.url}}" alt="" width="80%" height="300px">
+        </p>
+        <h2 class="alert alert-light text-center font-italic">{{product.name|capfirst}}</h2>
+        <div class="container">
+            <p class="text-center">
+                 <form action="{% url 'cart:cart_add' product.id %}" method="POST">
+                {{ cart_product_form|crispy}}
+                {% csrf_token %}
+               
+                <p>
+                  
+                 
+                  <h4 class="alert alert-light">Sizes and Colors</h4>
+                                   
+                  
+                  <p>
+                      {{size_form|crispy}}                     
+                </p>
+
+                  <p>
+                      {{color_form|crispy}}                     
+                </p>
+                <p class="text-center">
+                <button class="btn btn-info" type="submit">
+                    Add to cart
+                </button>
+                </p>
+            </form>
+            </p>
+           
+        </div>
+
+        {% endif %}
+
+    </div>
+    <div class="col-lg-6"> 
+        
+        {% if product.image1 %}
+            <h5 class="alert alert-link text-center">Gallery for {{product.name}}</h5>
+        {% endif %}
+                     
+           
+                
+        <div class="container">
+             {% if product.image1 %}
+                <p class="text-center">
+                    <img src="{{product.image1.url}}" alt="" width="80%" height="200px">
+                </p>
+            {% endif %}
+             {% if product.image2 %}
+                <p class="text-center">
+                    <img src="{{product.image2.url}}" alt="" width="80%" height="200px">
+                </p>
+            {% endif %}
+             {% if product.image3 %}
+                <p class="text-center">
+                    <img src="{{product.image3.url}}" alt="" width="80%" height="200px">
+                </p>
+            {% endif %}
+        </div>
+        
+            
+        
+    </div>
+</div>
+{% endif %}
+
+
+{% endblock content %}
+
+
+
+{% block footer %}
+    
+{% endblock footer %}
+    

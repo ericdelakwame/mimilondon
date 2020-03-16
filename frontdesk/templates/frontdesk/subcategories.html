@@ -1,0 +1,88 @@
+{% extends 'frontdesk/base.html' %}
+
+
+
+{% block title %}
+    Subcategories Under {{category.name}}
+{% endblock title %}
+    
+
+
+
+{% block content %}
+
+<div class="row container-fluid" style="margin-top: 60px;">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-8">
+        
+        
+        
+        {% if subcategories %}
+        <div class="container jumbotron" style="margin: auto;">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>No Of Items</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{category.name}}</td>
+                        <td>
+                            {{subcategories.count}}
+                        </td>
+                        <td>
+                            <a class="btn btn-info" href="{% url 'dashboard:new_subcategory' category.pk %}">Add Subcategory To {{category.name|capfirst}}</a>
+                        </td>
+                        
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="container jumbotron" style="margin: auto;">
+            <h3 class="alert alert-secondary text-center">
+                Sub Categories: {{subcategory.category.name|capfirst}}
+             </h3>
+        </div>
+        
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Name</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                {% for sub in subcategories %}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{sub.name}}</td>
+                        <td><a class="text-danger" href="{% url 'dashboard:remove_subcategory' sub.pk %}">Remove {{sub.name}}</a></td>
+                        <td><a href="">Edit {{sub.name}}</a></td>
+                        <td><a class="btn btn-info" href="{% url 'dashboard:new_product' sub.pk %}">Add A Product To {{sub.name}}</a></td>
+                    </tr>
+                {% endfor %}
+                    
+            </tbody>
+        </table>
+        {% endif %}
+            
+   
+            
+    </div>
+    <div class="col-lg-2"></div>
+</div>
+    
+{% endblock content %}
+    
+
+
+{% block footer %}
+    
+{% endblock footer %}
+    

@@ -1,0 +1,95 @@
+{% extends 'trending/base.html' %}
+
+
+{% block title %}
+  
+{% endblock title %}
+  
+
+
+{% block heading %}
+  
+{% endblock heading %}
+
+
+{% block content %}
+  <div class="site-wrap">
+
+    
+
+    <div class="site-mobile-menu">
+      <div class="site-mobile-menu-header">
+        <div class="site-mobile-menu-close mt-3">
+          <span class="icon-close2 js-menu-toggle"></span>
+        </div>
+      </div>
+      <div class="site-mobile-menu-body"></div>
+    </div> <!-- .site-mobile-menu -->
+    
+    
+    
+  
+    <div class="site-blocks-cover inner-page overlay" style="background-image: url(/static/trending/images/banner2.png);" data-aos="fade" data-stellar-background-ratio="0.5">
+      <div class="row align-items-center justify-content-center">
+        <div class="col-md-5 text-center" data-aos="fade">
+          <h1 class="text-uppercase">Trending</h1>
+          <span class="caption d-block text-white h6">On<a href="#">mimilondonglamour.com</a></span>
+        </div>
+      </div>
+    </div>  
+
+    <div class="slant-1"></div>
+
+    
+    
+  <div class="site-section first-section" data-aos="fade">
+      <div class="container">
+        <div class="row mb-5" style="width: 100%;">
+          
+          {% for post in posts %}
+            
+         
+            
+          <div class="col-md-6 col-lg-4 mb-5 d-block">
+            <div class="media-image">
+              <a href="{{post.get_absolute_url}}">
+                
+                {% if post.image %}
+                  <img src="{{post.image.url}}" alt="Image" width="80%" height="200px">
+                {% endif %}                
+                
+              </a>
+
+              <div class="media-image-body">
+                <h2 class="font-secondary text-uppercase"><a href="{{post_get_absolute_url}}">{{post.title}}</a></h2>
+                <span class="d-block mb-3">{{post.author}} &mdash; {{post.created}}</span>
+                <p>{{post.sub_title}}</p>
+                <p><a href="{{post.get_absolute_url}}">Read More</a></p>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+
+      
+      </div>
+    </div>
+
+    
+
+    <div class="py-5 bg-primary">
+      <div class="container">
+        <div class="row align-items-center justify-content-center">
+          <div class="col-md-6 text-center mb-3 mb-md-0">
+            
+            <a href="{% url 'accounts:profile' %}" class="btn btn-light font-secondary text-uppercase" data-aos="fade-up" data-aos-delay="100">Home</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  
+{% endblock content %}
+  
+  

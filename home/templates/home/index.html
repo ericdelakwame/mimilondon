@@ -1,0 +1,408 @@
+{% extends 'home/base.html' %}
+
+
+
+{% block title %}
+    
+{% endblock title %}
+
+
+
+{% block heading %}
+    
+{% endblock heading %}
+
+
+
+{% block content %}
+   <div class="slide-one-item home-slider owl-carousel">
+      
+      <div class="site-blocks-cover inner-page overlay" style="background-image: url(/static/home/images/banner1.png);" data-aos="fade" data-stellar-background-ratio="0.5">
+        <div class="container">
+          <div class="row align-items-center justify-content-center">
+            <div class="col-md-6 text-center" data-aos="fade">
+              <h3 class="font-secondary text-white  font-weight-bold">mimilondonglamour.com</h3>
+            </div>
+          </div>
+        </div>
+      </div>  
+
+      <div class="site-blocks-cover inner-page overlay" style="background-image: url(/static/home/images/banner3.png);" data-aos="fade" data-stellar-background-ratio="0.5">
+        <div class="container">
+          <div class="row align-items-center justify-content-center">
+            <div class="col-md-7 text-center" data-aos="fade">
+              <h3 class="font-secondary text-white font-weight-bold text-uppercase">Freshest Look For All Seasons</h3>
+            </div>
+          </div>
+        </div>
+      </div> 
+    </div>
+
+    <div class="slant-1"></div>
+
+    <div id="categories" class="site-section first-section">
+      <div class="container">
+        <div class="row mb-5">
+          <div class="col-md-12 text-center" data-aos="fade"> 
+            <span class="caption d-block mb-2 font-secondary font-weight-bold">Good Quality Fabrics</span>
+            <h2 class="site-section-heading text-center font-secondary">Categories To Suit All</h2>
+          </div>
+        </div>
+        <div class="row border-responsive">
+          <div class="col-md-6 col-lg-3 mb-4 mb-lg-0 border-right" data-aos="fade-up" data-aos-delay="">
+            <div class="text-center">
+             <img src="/static/home/images/men1.png" alt="" height="200px" width="200px">
+              <h3 class="text-uppercase h4 mb-3"> <a href="{% url 'shop:categories' %}">Men</a> </h3>
+              <p> All styles and colors for men available in the shop</p>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3 mb-4 mb-lg-0 border-right" data-aos="fade-up" data-aos-delay="100">
+            <div class="text-center">
+              <img src="/static/home/images/women3.png" alt="" width="200px" height="200px">
+              <h3 class="text-uppercase h4 mb-3"><a href="{% url 'shop:categories' %}">Women</a></h3>
+              <p>Exquisite fashion ideas with you in mind</p>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3 mb-4 mb-lg-0 border-right" data-aos="fade-up" data-aos-delay="200">
+            <div class="text-center">
+              <img src="/static/home/images/children1.png" alt="" width="200px" height="200px">
+              <h3 class="text-uppercase h4 mb-3"><a href="{% url 'shop:categories' %}">Children</a></h3>
+              <p>We have a range of children's clothing from a wide selection of the worlds luxury brands</p>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3 mb-4 mb-lg-0" data-aos="fade-up" data-aos-delay="300">
+            <div class="text-center">
+              <img src="/static/home/images/accessories1.png" alt="" height="200px" width="200px">
+              <h3 class="text-uppercase h4 mb-3"><a href="{% url 'shop:categories' %}">Accessories</a></h3>
+              <p>Enjoy our fantastic range of Bags, Shoes, Accessories & more</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<!-- Products -->
+
+{% if products %}
+
+    <div id="products" class="site-section">
+      <div class="container">
+        <div class="row mb-5">
+          <div class="col-md-12" data-aos="fade">
+            <h2 class="site-section-heading text-center text-uppercase">New on mimilondonglamour</h2>
+          </div>
+        </div>
+        <div class="row" style="width: 100%;">
+            
+            {% for product in products %}
+          <div class="col-md-6 col-lg-4 mb-5 d-block" data-aos="fade-up" data-aos-delay="100">
+            <div class="media-image">
+                
+                {% if product.image %}
+                 <a href="{{product.get_absolute_url}}">
+                     <img src="{{product.image.url}}" alt="Image" width="80%" height="300px">
+                    </a>       
+                {% endif %}
+                    
+             
+              <div class="media-image-body">
+                <h2 class="font-secondary text-uppercase"><a href="{{product.get_absolute_url}}">{{product.name}}</a></h2>
+                <span class="d-block mb-3">{{product.sub_category.name}} &mdash; {{product.sub_category.category.name}}</span>
+                <p>$ {{product.price}}</p>
+ 
+                <p><a href="{{product.get_absolute_url}}">View</a></p>
+              </div>
+            </div>
+          </div>      
+            {% endfor %}
+                
+          
+          
+        </div>
+      </div>
+    </div>
+{% endif %}
+<!-- End Products -->
+    
+  <div id="aboutus" class="site-half">
+    <div class="img-bg-1" style="background-image: url('/static/home/images/logo/mimilogo.jpg');" data-aos="fade"></div>
+    <div class="container">
+      <div class="row no-gutters align-items-stretch">
+        <div class="col-lg-5 ml-lg-auto py-5">
+          <span class="caption d-block mb-2 font-secondary font-weight-bold">About Us</span>
+          <h2 class="site-section-heading text-uppercase font-secondary mb-5"></h2>
+          <p>
+
+mimilondonglamour is your one-stop online shop for today's most exciting and edgy fashion apparel. Our affordable collections redefine trends, design excellence and exceptional quality to satisfy the needs of every aspiring fashionista. We aim to bring to you the latest news and fashion trends worldwide.
+
+We bring a new level of diversity and exciting styles that best represent your personality
+</p>
+
+          <p>Stay with us for more!</p>  
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="site-half block">
+    <div class="img-bg-1 right" style="background-image: url('/static/home/images/women2.png');" data-aos="fade"></div>
+    <div class="container">
+      <div class="row no-gutters align-items-stretch">
+        <div class="col-lg-5 mr-lg-auto py-5">
+          <span class="caption d-block mb-2 font-secondary font-weight-bold">World Wide Deliveries</span>
+          <h2 class="site-section-heading text-uppercase font-secondary mb-5"></h2>
+          <p>We endeavour to get your favourite apparel to you wherever you are. </p>
+
+          <p>We have customers in the UK, USA, Europe, Africa</p>  
+        </div>
+      </div>
+    </div>
+  </div>
+    
+
+  <div class="site-section ">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <span class="caption d-block mb-2 font-secondary font-weight-bold">Fresh &amp; Fabrics</span>
+            <h2 class="site-section-heading text-uppercase text-center font-secondary">More Goodies</h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 block-13 nav-direction-white">
+            <div class="nonloop-block-13 owl-carousel">
+              
+              {% for p  in products %}
+                
+                {% if forloop.counter|divisibleby:2 %}
+                  
+                
+                  
+              <div class="media-image">
+                
+                {% if p.image %}
+                  <img src="{{p.image.url}}" alt="Image" width="80%" height="200px">
+                {% endif %}
+                  
+                
+                <div class="media-image-body">
+                  <h2 class="font-secondary text-uppercase">{{p.name}}</h2>
+                  <p>{{p.description}}</p>
+                  <p><a href="#" class="btn btn-primary text-white px-4">Learn More</a></p>
+                </div>
+              </div>
+              {% else %}
+              <div class="media-image">
+                
+                {% if p.image %}
+                <img src="{{p.image.url}}" alt="Image" width="80%" height="200px">  
+                {% endif %}
+                  
+                
+                <div class="media-image-body">
+                  <h2 class="font-secondary text-uppercase">{{p.name}}</h2>
+                  <p>{{p.description}}</p>
+                  <p><a href="#" class="btn btn-primary text-white px-4">Learn More</a></p>
+                </div>
+              </div>
+              {% endif %}
+              {% endfor %}
+                
+             
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+    
+
+    
+    <div class="site-section section-counter">
+      <div class="container">
+        
+        {% if not vid %}
+          <div class="row">
+          <div class="col-lg-6">
+            <p class="mb-5"><img src="/static/home/images/women1.png" alt="Image" class="img-fluid"></p>
+          </div>
+          <div class="col-lg-5 ml-auto">
+            <h2 class="site-section-heading mb-3 font-secondary text-uppercase">Hurry and place your orders</h2>
+            <p class="mb-5">Our ever changing stock reflects our passion for bringing to you the latest in fashion trends </p>
+
+            <div class="row">
+              <div class="col-lg-6">
+                <div class="counter">
+                  <span class="caption">Thousands of products</span>
+                  <span class="number" data-number="49020">0</span>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="counter">
+                  <span class="caption">Loads of items to choose from</span>
+                  <span class="number" data-number="275">0</span>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+        {% else %}
+          <!--Home Vid  -->
+
+  <div class="row">
+          <div class="col-lg-6">
+            
+          
+              <video autoplay controls src="{{vid.vid.url}}"></video>
+            
+              
+         
+          </div>
+          <div class="col-lg-5 ml-auto">
+            
+          
+            <h2 class="site-section-heading mb-3 font-secondary text-uppercase">Hurry and place your orders</h2>
+            <p class="mb-5">{{vid.content}}</p>   
+           
+              
+           
+
+            <div class="row">
+              <div class="col-lg-6">
+                <div class="counter">
+                  <span class="caption">Thousands of products</span>
+                  <span class="number" data-number="49020">0</span>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="counter">
+                  <span class="caption">Loads of items to choose from</span>
+                  <span class="number" data-number="275">0</span>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+
+          <!-- End Home Vid -->
+        {% endif %}
+          
+      
+      </div>
+    </div>
+
+    
+    <div class="site-section block-14 nav-direction-white">
+
+      <div class="container">
+        
+        <div class="row mb-5">
+          <div class="col-md-12">
+            <h2 class="site-section-heading text-center text-uppercase">Our ladies section is buzzing with the latest styles and trends</h2>
+          </div>
+        </div>
+
+        <div class="nonloop-block-14 owl-carousel">
+          
+
+            <div class="d-block block-testimony mx-auto text-center">
+              <div class="person w-25 mx-auto mb-4">
+                <img src="static/home/images/bag1.png" alt="Image" class="rounded-circle"  width="300px" height="200px">
+              </div>
+              <div>
+                <h2 class="h5 mb-4">Bags</h2>
+                <blockquote>&ldquo;Discover our great deals on designer leather handbags, shoulder bags and clutch bags&rdquo;</blockquote>
+              </div>
+            </div>
+
+            <div class="d-block block-testimony mx-auto text-center">
+              <div class="person w-25 mx-auto mb-4">
+                <img src="static/home/images/shoes1.png" alt="Image" class=" rounded-circle" width="300px" height="200px">
+              </div>
+              <div>
+                <h2 class="h5 mb-4">Shoes</h2>
+                <blockquote>&ldquo; When it comes to shoes, we have in stock  everything from boots, dress shoes, sneakers, and sandals to suit work,  fashion, running, or just pure comfort needs!&rdquo;</blockquote>
+              </div>
+            </div>
+ 
+            <div class="d-block block-testimony mx-auto text-center">
+              <div class="person w-25 mx-auto mb-4">
+                <img src="static/home/images/jewellery1.png" alt="Image" class="rounded-circle" width="300px" height="200px">
+              </div>
+              <div>
+                <h2 class="h5 mb-4">Jewellery</h2>
+                <blockquote>&ldquo; Womens jewellery, watches and sunglasses – necklaces, bracelets, earrings, rings, coins and pendants. We got them all on mimilondonglamour.com!&rdquo;</blockquote>
+              </div>
+            </div>
+
+            <div class="d-block block-testimony mx-auto text-center">
+              <div class="person w-25 mx-auto mb-4">
+                <img src="static/home/images/accessories2.png" alt="Image" class="rounded-circle" width="300px" height="200px">
+              </div>
+              <div>
+                <h2 class="h5 mb-4">Accessories</h2>
+                <blockquote>&ldquo;Complete your fresh look with accesories for Him and Her right here on mimilondonglamour.com. We stock a wide range of top brands!&rdquo;</blockquote>
+              </div>
+            </div>
+
+        </div>
+
+      </div>
+      
+    </div>
+
+{% if posts %}
+
+    <div id="trending" class="site-section">
+      <div class="container">
+        <div class="row mb-5">
+          <div class="col-md-12" data-aos="fade">
+            <h2 class="site-section-heading text-center text-uppercase">Trending on mimilondonglamour</h2>
+          </div>
+        </div>
+        <div class="row" style="width: 100%;">
+            
+            {% for post in posts %}
+          <div class="col-md-6 col-lg-4 mb-5 d-block" data-aos="fade-up" data-aos-delay="100">
+            <div class="media-image">
+                
+                {% if post.image %}
+                 <a href="{{post.get_absolute_url}}">
+                     <img src="{{post.image.url}}" alt="Image" width="80%" height="300px">
+                    </a>       
+                {% endif %}
+                    
+             
+              <div class="media-image-body">
+                <h2 class="font-secondary text-uppercase"><a href="{{post.get_absolute_url}}">{{post.title}}</a></h2>
+                <span class="d-block mb-3">By {{post.author.first_name}} &mdash; {{post.title}}</span>
+                <p>{{post.sub_title}}</p>
+                <p><a href="{{post.get_absolute_url}}">Read More</a></p>
+              </div>
+            </div>
+          </div>      
+            {% endfor %}
+                
+          
+          
+        </div>
+      </div>
+    </div>
+{% endif %}
+    
+    
+
+
+
+
+{% endblock content %}
+    
+    
+
+{% block footer %}
+    
+{% endblock footer %}
+    

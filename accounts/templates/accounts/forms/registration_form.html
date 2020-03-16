@@ -1,0 +1,56 @@
+{% extends 'home/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load leaflet_tags %}
+
+{% block title %}
+    New account
+{% endblock title %}
+    
+{% block heading %}
+{{utype|capfirst}} Registration
+{% endblock heading %}
+
+
+{% block content %}
+<head>
+    {% leaflet_css %}
+    {% leaflet_js %}
+    
+    {{form.media}}
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+<script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+    
+</head>
+
+<div class="row container-fluid mt-5">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-8">
+        <h5 class="alert alert-link text-center">{{utype|capfirst}} Form</h5>
+        <form method="POST" action="" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="bor8 m-b-20 how-pos4-parent">
+               {{form|crispy}}
+            </div>
+
+           <div class="container">
+            <button class="flex-c-m stext-101 cl0 size-121 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">
+                Submit
+            </button>
+           </div>
+
+           
+        </form>
+    </div>
+    <div class="col-lg-2"></div>
+</div>
+  
+{% endblock content %}
+
+
+
+{% block footer %}
+    
+{% endblock footer %}
+    
+    

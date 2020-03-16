@@ -1,0 +1,92 @@
+{% extends 'home/base.html' %}
+{% load crispy_forms_tags %}
+{% load leaflet_tags %}
+{{form.media}}
+{% block heading %}
+Check Out    
+{% endblock heading %}
+    
+
+{% block content %}
+
+<div class="row container-fluid mt-5">
+
+      <div class="col-lg-8">
+          
+          <div class="jumbotron text-center" style="width: 80%; height: 60%;">
+            
+                <h2 class="alert alert-light text-center">Your order</h2>
+             
+                <table class="table table-light table-responsive-sm table-responsive-md">
+                      <thead>
+                        <tr class="text-center">
+                              <th>Item</th>
+                              <th>Ghs</th>
+                              <th>Quantity</th>
+                              <th>Size</th>
+                              <th>Color</th>
+                        </tr>
+                        </thead>
+                        
+                        <tbody>                              
+                        {% for item in cart %}
+                        <tr class="text-left text-capitalize">
+                              <td>{{item.product.name}}</td>
+                              <td>{{item.product.price}}</td>
+                              <td>{{item.quantity}}</td>
+                              <td>
+                              {% if item.product.sizes %}
+                                    
+                        {% for s in item.product.sizes.all %}
+                                    {{s.size}}           
+                                    {% endfor %}
+                                          
+                              {% endif %}
+                              </td> 
+                              <td>
+                              {% if item.product.colors %}
+                                    
+                        {% for c in item.product.colors.all   %}
+                                          {{c.color}}
+                                    {% endfor %}
+                                          
+                              {% endif %}
+                              </td>
+                              
+                                    
+                              
+                        </tr>       
+                        {% endfor %}
+                        </tbody>                     
+                       
+                </table>
+                <p class="h3 alert alert-success mt-2">Total: Ghs {{ cart.get_total_price }}</p>
+                
+               
+                
+
+          </div>
+      </div>  
+      <div class="col-lg-4 container">
+        <h2 class="alert alert-light text-center">Your Details</h2>        
+                          <form action="{% url 'orders:order_create' %}" method="POST" enctype="multipart/form-data">
+                              {% csrf_token %}
+                              <p>{{form|crispy}}</p>
+
+                              <p>
+                                    <button type="submit">
+                                          ok
+                                    </button>
+                              </p>
+                          </form>
+                   
+            
+      </div>
+   
+</div>
+
+
+
+{% endblock content %}
+    
+    

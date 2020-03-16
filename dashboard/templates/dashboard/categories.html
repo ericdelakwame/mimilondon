@@ -1,0 +1,139 @@
+{% extends 'dashboard/base.html' %}
+{% load crispy_forms_tags %}
+
+
+{% block title %}
+    
+{% endblock title %}
+    
+
+
+{% block heading %}
+    
+{% endblock heading %}
+
+
+
+{% block content %}
+
+<div class="row" style="margin-top: 50px;">
+    <div class="col-lg-4">
+
+        
+        {% if categories %}
+        <h4 class="alert alert-light">Categories</h4>
+        <table class="table table-hover">
+            <thead class="thead-light">
+                <tr>
+                    <th>Name</th>
+                    <th>Add Subcategory</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                
+                {% for category in categories %}
+                    <tr>
+                        <td>{{category.name|capfirst}}</td>
+                        <td><a class="text-info" href="{% url 'dashboard:new_subcategory' category.pk %}">Add</a></td>
+                    </tr>
+                {% endfor %}
+                    
+            </tbody>
+
+        </table>
+            
+        {% endif %}      
+    </div>
+
+    <div class="col-lg-4"></div>
+    <div class="col-lg-4">
+   {% if subcategories %}
+        <h4 class="alert alert-light">Sub Categories</h4>
+            <table class="table table-hover">
+                <thead class="thead-light">
+                    <tr>
+                        <th>Name</th>
+                        <th>Category</th>
+                        <th>Add Item</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    {% for sub in subcategories %}
+                        <tr>
+                            <td>{{sub.name|capfirst}}</td>
+                            <td>{{sub.category.name|capfirst}}</td>
+                            <td><a class="text-info" href="{% url 'dashboard:new_product' sub.pk %}">Add New {{sub.name|capfirst}}</a></td>
+                        </tr>
+                    {% endfor %}
+                        
+                </tbody>
+            </table>
+        {% endif %}
+    </div>
+</div>
+
+
+<div class="row container mt-5">
+    <div class="col-lg-3"></div>
+
+    <div class="col-lg-6 container">
+        
+        <!-- {% if formset or form %} -->
+         
+            <div class="container-fluid">
+                <h2 class="alert alert-info text-center">Add an item to {{subcategory.name|capfirst}}</h2>
+                <form action="" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div id="container-fluid">
+                    <p> {{form|crispy}}</p>
+                </div>
+               
+                <h6 class="alert alert-light text-center">Add more sizes and colors</h6>
+                <div id="fset" onclick="add_form">
+                     <p >
+                        <h4 class="alert alert-light text-center">Colors</h4>
+                        {{color_formset|crispy}}
+                    </p>
+
+                    <p>
+                        <h4 class="alert alert-light text-center">Sizes</h4>
+                        {{size_formset|crispy}}
+                    </p>
+                    
+                     
+                  
+                        
+                   
+                
+                  
+                       
+                </div>
+                
+                <p class="text-center">
+                    <button type="submit" class="btn btn-info btn-lg">Add item</button>
+                </p>
+            </form>
+            <script type="text/javascript">
+            // $(document.ready){
+            //     $(fset).
+            // }
+
+            </script>
+            </div>
+        <!-- {% endif %}            -->
+
+    </div>
+    <div class="col-lg-3"></div>
+</div>
+
+    
+{% endblock content %}
+
+
+
+{% block footer %}
+    
+{% endblock footer %}
+    

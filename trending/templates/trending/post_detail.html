@@ -1,0 +1,201 @@
+  {% extends 'trending/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+  {{post.title}}
+{% endblock title %}
+  
+  
+  {% block content %}
+    
+
+  <div class="site-wrap">
+
+    
+
+  
+    <div class="site-blocks-cover inner-page overlay" style="background-image: url(/static/trending/images/b4.webp); background-size: cover;" data-aos="fade" data-stellar-background-ratio="0.5">
+      <div class="row align-items-center justify-content-center">
+        <div class="col-md-12 text-center" data-aos="fade">
+          <h1 class="text-uppercase">{{post.title}}</h1>
+          <span class="caption d-block text-white">{{post.created}} &bullet; By <a href="#">mimilondonglamour team</a></span>
+        </div>
+      </div>
+    </div>  
+
+    <div class="slant-1"></div>
+
+    
+    
+  <div class="site-section first-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 blog-content">
+            <p class="lead h4">
+              {{post.title}}
+            </p>
+            
+            {% if post.image %}
+            <p>
+              <img src="{{post.image.url}}" alt="Image" class="img-fluid">
+            </p>  
+            {% endif %}
+              
+            
+
+            <blockquote><p>
+              {{post.sub_title}}
+            </p></blockquote>
+
+            <p>{{post.content}}</p>
+            <div class="pt-5">
+              <p>Categories:  
+                <a href="#"></a>
+              </p>
+            </div>
+
+            <div class="container mt-4">
+              <h6 class="alert alert-light text-center">Leave a comment</h6>
+              <form action="" method="POST">
+                {% csrf_token %}
+                {{form|crispy}}
+                <p >
+                  <button type="submit" class="btn btn-success">
+                    Send
+                  </button>
+                </p>
+              </form>
+            </div>
+            <div class="pt-5">
+              
+              {% if post.comments %}
+              <h3 class="mb-5">{{post.comments.count}} Comment{{post.comments.count|pluralize}}</h3>  
+              <ul class="comment-list">
+                
+                {% for comment in comments %}
+                <li class="comment">
+                  <div class="vcard bio">
+                  
+                      
+                      {% if comment.author.photo %}
+                    <img src="{{comment.author.photo.url}}}" alt="">    
+                      {% endif %}
+                        
+                    
+                  </div>
+                  <div class="comment-body">
+                    <h3>{{comment.author}}</h3>
+                    <div class="meta">{{comment.created}}</div>
+                    <p>{{comment.content}}</p>
+                  </div>
+                </li>    
+                {% endfor %}
+                  
+              
+
+                
+              </ul>
+              
+              {% endif %}
+                
+              
+              
+              <!-- END comment-list -->
+              
+            
+            </div>
+
+          </div>
+          <div class="col-md-4 sidebar">
+            <div class="sidebar-box">
+              <form action="#" class="search-form">
+                <div class="form-group">
+                  <span class="icon fa fa-search"></span>
+                  <input type="text" class="form-control" placeholder="Type a keyword and hit enter">
+                </div>
+              </form>
+            </div>
+            <div class="sidebar-box">
+              <div class="categories">
+                
+                {% if  categories %}
+                <h3 class="text-uppercase">Categories</h3>
+                
+                {% for category in categories %}
+              <li>
+                <a href="#">
+                  Creatives <span>(12)</span></a></li>    
+                {% endfor %}
+                  
+                
+                    
+                {% endif %}
+                  
+              
+              </div>
+            </div>
+            <div class="sidebar-box">
+              {% if other_posts %}
+              <h4 class="alert alert-light text-center">Other News</h4>
+              {% for post in other_posts %}
+              
+              {% if post.image %}
+              <p class="text-center">
+                <img src="{{post.image.url}}" alt="Image placeholder" class="img-fluid mb-4"> 
+              </p>
+               
+              {% endif %}
+                
+              
+              <h3 class="text-uppercase">{{post.title}}</h3>
+              <p>{{post.sub_title}}</p>
+              <p><a href="{{post.get_absolute_url}}" class="btn btn-primary text-white">Read More</a></p>  
+              {% endfor %}
+                
+              
+
+  
+              {% endif %}
+                
+                          </div>
+
+            <div class="sidebar-box">
+              
+              {% if featured_products %}
+                
+              <h3 class="text-uppercase">Featured Products</h3>
+              
+              {% for product in featured_products %}
+              <div class="container">
+                <h6>{{product.name}}</h6>
+                
+                {% if product.image %}
+                  <p>
+                    <img src="{{product.image.url}}" alt="" width="80%" height="100px">
+                  </p>
+                  <p><a href="{{prooduct.get_absolute_url}}">Check it out</a></p>
+                {% endif %}
+                  
+
+              </div>    
+              {% endfor %}
+                
+            
+              {% endif %}
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  
+  </div>
+
+   {% endblock content %}
+
+
+
+{% block footer %}
+    
+{% endblock footer %}

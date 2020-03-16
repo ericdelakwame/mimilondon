@@ -1,0 +1,199 @@
+{% extends 'shop/base.html' %}
+
+
+
+{% block title %}
+    Categories
+{% endblock title %}
+
+
+
+
+
+
+
+{% block content %}
+ <div class="slant-1"></div>
+   <div class="site-section ">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <span class="caption d-block mb-2 font-secondary font-weight-bold">New On &amp; mimilondonglamour.com</span>
+            <h2 class="site-section-heading alert alert-light text-center font-secondary"> </h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 block-13 nav-direction-white">
+            <div class="nonloop-block-13 owl-carousel">
+              
+              {% for p  in products|slice:"0:4" %}
+                
+                {% if forloop.counter|divisibleby:2 %}
+                  
+                
+                  
+              <div class="media-image">
+                
+                {% if p.image %}
+                  <img src="{{p.image.url}}" alt="Image" width="80%" height="100px">
+                {% endif %}
+                  
+                
+                <div class="media-image-body">
+                  <h2 class="font-secondary text-uppercase">{{p.name|capfirst}}</h2>
+                  <p>{{p.description|capfirst}}</p>
+                  <p><a href="{{p.get_absolute_url}}" class="btn btn-info text-white px-4">View</a></p>
+                </div>
+              </div>
+              {% else %}
+              <div class="media-image">
+                
+                {% if p.image %}
+                <img src="{{p.image.url}}" alt="Image" width="80%" height="100px">  
+                {% endif %}
+                  
+                
+                <div class="media-image-body">
+                  <h2 class="font-secondary text-uppercase">{{p.name}}</h2>
+                  <p>{{p.description|capfirst}}</p>
+                  <p><a href="{{p.get_absolute_url}}" class="btn btn-info text-white px-4">View</a></p>
+                </div>
+              </div>
+              {% endif %}
+              {% endfor %}
+                
+             
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+<div class="row">
+  <div class="slant-1"></div>
+</div>
+    <div id="categories" class="row">
+  <div class="col-lg-12">
+
+
+    <div class="container">
+      <h2 class="font-italic alert alert-light">Categories</h2>
+      
+    </div>
+   
+  </div>
+</div>
+
+<div class="row container-fluid">
+    <div class="col-lg-4">
+        <div  class="container">
+            
+            {% if categories %}
+           
+                
+                {% for item in categories %}
+                    <div class="container">
+                        <h3 class="alert alert-light">
+                          <a class="btn btn-outline-info" href="{% url 'shop:category_detail' item.pk %}">{{item.name|capfirst}} <span class="text-info" style="font-size: 12px;">View Items in {{item.name|capfirst}}</span></a>
+                        </h3>
+                        <ul class="nav">
+                             {% for p in item.subcategories.all  %}
+                            <li class="nav-item">
+                                <a class="btn btn-light"  href="{{p.get_absolute_url}}">{{p.name|capfirst}}</a>
+                                
+                                {% for product in p.products.all %}
+                                    <p style="font-size: 12px;"><a class="text-link"  href="{{product.get_absolute_url}}">{{product.name|capfirst}}</a></p>
+                                {% endfor %}
+                                    
+                            </li>
+                        {% endfor %}
+                        </ul>
+                       
+                            
+                    </div>
+                {% endfor %}
+                    
+            {% endif %}
+                
+        </div>
+    </div>
+    <div class="col-lg-8">
+      <div class="container jumbotron-fluid">
+        
+        {% if category %}
+          <h2 class="site-section-heading alert alert-light text-center">{{category.name|capfirst}}</h2>
+          
+          {% for item in category.subcategories.all %}
+            <div class="container jumbotron-fluid">
+              <h2 class="alert alert-light"><a href="{{item.get_absolute_url}}"> {{item.name|capfirst}}</a></h2>
+            </div>
+            
+            {% if item.products %}
+              <h6 class="alert alert-info">{{item.products.count}} Item{{item.products.count|pluralize}}</h6>
+              <div class="row" style="width: 100%;">
+              {% for product in item.products.all %}
+                <div class="col-lg-6 col-sm-12 col-md-6">
+                  
+                  {% if product.image %}
+                  <p class="text-center">
+                    <img src="{{product.image.url}}" alt="" width="80%" height="200px">
+                  </p>
+                    
+                  {% endif %}
+                  <h4><a href="{{product.get_absolute_url}}">{{product.name|capfirst}}</a> </h4>
+                  <h6>$ {{product.price}}</h6>
+                  <h6><a class="btn btn-info" href="{{product.get_absolute_url}}">Buy</a></h6>
+                    
+                </div>
+                 
+                  
+              {% endfor %}
+              </div>
+           
+                
+            {% endif %}
+              
+          {% endfor %}
+            
+        {% endif %}
+          
+      </div>
+
+    </div>
+</div>  
+
+
+<div id="products" class="row container-fluid">
+  <div class="slant-1"></div>
+  <div class="container jumbotron" data-aos="fade-up" data-aos-delay="300">
+     <h5 class="alert alert-light text-info text-center">Our Products</h5>
+  </div>
+ 
+</div>
+<div id="products" class="row" style="width: 100%;" data-aos="fade-up" data-aos-delay="300">
+  
+  {% for product in products %}
+    <div class="col-lg-4 col-md-4 col-sm-6">
+    
+    {% if product.image %}
+    <p class="text-center">
+      <img src="{{product.image.url}}" alt="" width="80%" height="200px">
+    </p>
+    {% endif %}
+    <h6 class="alert alert-light" class=""><a href="{{product.get_absolute_url}}">{{product.name|capfirst}} $ {{product.price}}</a></h6>
+      <h6 class="text-center"><a class="btn btn-info" href="{{product.get_absolute_url}}">View</a></h6>
+    
+      
+  </div>
+  {% endfor %}
+    
+  
+</div>
+{% endblock content %}
+    
+
+
+
+{% block footer %}
+    
+{% endblock footer %}
+    
