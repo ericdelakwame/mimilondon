@@ -11,33 +11,7 @@ Your order is being processed
 
 
 {% block heading %}
-<div class="row container-fluid" style="margin-top: 50px;">
-    <div class="col-lg-4">
-       
-    </div>
-    <div class="col-lg-4">
-        
-         <div class="container jumbotron">
-            <h5 class="alert alert-light text-capitalize">
-                    
-                {{customer|capfirst}}
-            </h5>
-            <h6 class="alert alert-light">Your order is being processed</h6>
-            
-        </div>
-        <p>
-            <a class="btn btn-success" href="{% url 'home:index' %}">
-                Back to fillup home
-            </a>
-                
-            
-        </p>
-         
-    </div>
-    <div class="col-lg-4">
-       
-    </div>
-</div>
+
     
 {% endblock heading %}
     
@@ -45,16 +19,32 @@ Your order is being processed
 
 
 {% block content %}
-<div class="row container-fluid" style="margin-top: 200px;">
+
+<div class="row container-fluid" style="margin-top: 50px;">
     <div class="col-lg-3"></div>
-    <div class="col-lg-6">
+    <div class="col-lg-6 container jumbotron">
+          <h5 class="alert alert-dark text-capitalize">
+                    
+                {{customer|capfirst}}
+            </h5>
+       
         
-        {% if request.user.is_authenticated %}
-            <h6>{{request.user.first_name}}</h6>
-        {% endif %}
+  
             
         
-        <p class="alert alert-light h2">Thanks for shopping at Fillup. Your order is being processed. Goodbye.</p><blockquote class="font-italic">Fillup team</blockquote>
+        <p class="alert alert-light text-center">
+            Thanks for shopping at mimilondonglamour.com. Your order is being processed. Goodbye.
+        </p>
+          <p>
+            <a class="btn btn-info" href="{% url 'home:index' %}">
+                Back to shop
+            </a>
+                
+            
+        </p>
+        <blockquote class="font-italic h5">
+            MLG team
+        </blockquote>
     </div>
     <div class="col-lg-3"></div>
 </div>

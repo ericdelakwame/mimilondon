@@ -1,13 +1,15 @@
 from django.conf.urls import url
 from .views import (
     product_list, categories, product_detail,
-    ProductSearchView, category_detail, subcategory_detail
+    ProductSearchView, category_detail, subcategory_detail,
+    category_info
 ) 
 
 app_name = 'shop'
 
 
 urlpatterns = [
+    url(r'^category/info/(?P<category_pk>\d+)/$', category_info, name='category_info'),
     url(r'^search/products/$', ProductSearchView.as_view(), name='product_search'),
     url(r'^category/(?P<category_pk>\d+)/$', category_detail, name='category_detail'),
     url(r'^subcategory/(?P<subcategory_pk>\d+)/$', subcategory_detail, name='subcategory_detail'),

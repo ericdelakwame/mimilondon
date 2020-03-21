@@ -1,6 +1,6 @@
 from django import forms
 from .models import (
-    Category, SubCategory, Product, Color, Size
+    Category, SubCategory, Product, Color, Size, Options
 )
 
 
@@ -28,6 +28,8 @@ class SubCategoryForm(forms.ModelForm):
 
 
 class ProductForm(forms.ModelForm):
+    size = forms.ModelChoiceField(queryset=Size.objects.all(), widget=forms.RadioSelect(), initial=0, required=False)
+    color = forms.ModelChoiceField(queryset=Color.objects.all(), widget=forms.RadioSelect(), initial=0, required=False)
     available = forms.ChoiceField(choices=(
         ('True', 'True'),
         ('False', 'False'),
@@ -41,40 +43,63 @@ class ProductForm(forms.ModelForm):
         ]
     
 
-class ColorForm(forms.ModelForm):
-
-    class Meta:
-        model = Color
-        fields = ['color']
-
 
 class SizeForm(forms.ModelForm):
-
+ 
     class Meta:
         model = Size
         fields = ['size']
 
+    
+    def __init__(self, product, *args, **kwargs):
+        super(SizeForm, self).__init__(*args, **kwargs)
+        self.fields['size']=forms.ModelChoiceField(queryset=product.sizes, widget=forms.Select(), required=False)
+    
+
+    
+    
+
 
 
 class ColorForm(forms.ModelForm):
-    size = forms.ModelMultipleChoiceField(queryset=Color.objects.all(), required=False, widget=forms.CheckboxSelectMultiple())
 
     class Meta:
         model = Color
         fields = ['color']
+    
+    def __init__(self, product, *args, **kwargs):
+        super(ColorForm, self).__init__(*args, **kwargs)
+        self.fields['color'] = forms.ModelChoiceField(queryset=product.colors, widget=forms.Select(), required=False)
+   
+        
+    
 
 
 
 class ProductColorForm(forms.ModelForm):
-    color = forms.ModelChoiceField(queryset=Color.objects.all(), required=False, widget=forms.RadioSelect())
+
     class Meta:
         model = Color
         fields = ['color']
 
 
 class ProductSizeForm(forms.ModelForm):
-    size = forms.ModelChoiceField(queryset=Size.objects.all(), required=False, widget=forms.RadioSelect())
 
     class Meta:
         model = Size
         fields = ['size']
+
+class OptionsForm(forms.ModelForm):
+
+    
+    class Meta:
+        model = Options
+        fields = ['size', 'color']
+
+    
+    def __init__(self, product, *args, **kwargs):
+        super(OptionsForm, self).__init__(*args, **kwargs)
+        self.fields['size']=forms.ModelChoiceField(queryset=product.sizes, widget=forms.Select())
+        self.fields['color'] = forms.ModelChoiceField(queryset=product.colors, widget=forms.Select())
+
+    

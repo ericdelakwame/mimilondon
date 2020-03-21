@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="{% static 'home/css/aos.css' %}">
 
     <link rel="stylesheet" href="{% static 'home/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'shop/css/style.css' %}">
     
   </head>
   <body>
@@ -59,16 +60,16 @@
                   <div class="d-inline-block d-lg-none ml-md-0 mr-auto py-3"><a href="#" class="site-menu-toggle js-menu-toggle text-black"><span class="icon-menu h3"></span></a></div>
 
                   <ul class="site-menu js-clone-nav d-none d-lg-block">
-                    <li class="active"><a href="{% url 'home:index' %}">Home</a></li>
-                       <li><a href="#products">Products</a></li>
-                       <li><a href="#categories">Categories</a></li>
+                    <li ><a class="text-info" href="{% url 'home:index' %}">Home</a></li>
+                       <li><a class="text-info" href="{% url 'shop:product_list' %}">Products</a></li>
+                       <li><a class="text-info" href="{% url 'shop:categories' %}">Categories</a></li>
                   
                     
                     {% if not request.user.is_authenticated %}
                         <li class="has-children">
-                      <a href="#">Sign Up</a>
+                      <a href="{% url 'accounts:login' %}">Sign Up</a>
                       <ul class="dropdown arrow-top">
-                        <li><a href="{% url 'accounts:register' 'vendor' %}">Vendors</a></li>
+                        
                         <li><a href="{% url 'accounts:register' 'customer' %}">Customer</a></li>
                       
                       </ul>

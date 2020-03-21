@@ -35,7 +35,7 @@
                 {% for category in categories %}
                     <tr>
                         <td>{{category.name|capfirst}}</td>
-                        <td><a class="text-info" href="{% url 'dashboard:new_subcategory' category.pk %}">Add</a></td>
+                        <td><a class="btn btn-light" href="{% url 'dashboard:new_subcategory' category.pk %}">Add</a></td>
                     </tr>
                 {% endfor %}
                     
@@ -50,10 +50,10 @@
     <div class="col-lg-4">
    {% if subcategories %}
         <h4 class="alert alert-light">Sub Categories</h4>
-            <table class="table table-hover">
+            <table class="table table-hover table-bordered">
                 <thead class="thead-light">
                     <tr>
-                        <th>Name</th>
+                        <th>Sub Catefory Name</th>
                         <th>Category</th>
                         <th>Add Item</th>
                     </tr>
@@ -63,8 +63,8 @@
                     {% for sub in subcategories %}
                         <tr>
                             <td>{{sub.name|capfirst}}</td>
-                            <td>{{sub.category.name|capfirst}}</td>
-                            <td><a class="text-info" href="{% url 'dashboard:new_product' sub.pk %}">Add New {{sub.name|capfirst}}</a></td>
+                            <td class="text-info">{{sub.category.name|capfirst}}</td>
+                            <td><a class="btn btnlight" href="{% url 'dashboard:new_product' sub.pk %}">Add New {{sub.name|capfirst}}</a></td>
                         </tr>
                     {% endfor %}
                         

@@ -25,34 +25,60 @@ Products
             
                 <div class="container jumbotron bg-info">
                     <h6 class="alert alert-light">
-                         {{product.sub_category.category.name|capfirst}}/ {{product.sub_category.name|capfirst}} 
+                         {{product.sub_category.category.name|capfirst}} / {{product.sub_category.name|capfirst}} 
                     </h6>
                     <h4 class="alert alert-heading text-center">{{product.name|capfirst}}</h4>
                     
                  
                  {% if product.sizes %}
-                     <h6 class="text-light">Sizes</h6>        
+                <table class="table">
+                       <thead>
+                           <tr>
+                            <th style="font-size: 12px;">Sizes</th> 
+                            {% for s in product.sizes.all %}
+                               
+                                   <th style="font-size: 12px;">{{s.size}}</th>
+    
+                           {% endfor %}
+
+                           </tr>           
+                       </thead> 
+                       
+                    </table>               
                  {% endif %}           
-                        
-                    {% for d in product.sizes.all %}
-                
-                             <li class="text-light">{{d.size|capfirst}}</li>                             
-                    {% endfor %}
+                   
                     
                     {% if product.colors %}
-                        <h6 class="text-light">Colors</h6>
+                         <table class="table">
+                       <thead>
+                           <tr>
+                            <th style="font-size: 12px;">Colors</th> {% for c in product.colors.all %}
+                               
+                                   <th class="text-light" style="font-size: 12px;">{{c.color|capfirst}}</th>
+    
+                           {% endfor %}
+
+                           </tr>           
+                       </thead> 
+                       
+                    </table>
                     {% endif %}
                         
 
-                    {% for d in product.colors.all %}
-                    <li class="text-light">{{d.color|capfirst}}</li>    
-                    {% endfor %}
                         
                     <div class="container mt-2">
-                    <h5 class="text-light text-center">Price: {{product.price}}</h5>
-                    <h5 class="text-light text-center">Stock: {{product.stock}}</h5>
+                    <h6 class="text-light">Price: {{product.price}}</h6>
+                    <h6 class="text-light">Stock: {{product.stock}}</h5>
                     </div>
                     
+                    <p> 
+                        <a class="btn btn-light" href="{% url 'dashboard:add_color' product.pk %}">
+                        Add Color
+                        </a>
+                        <a class="btn btn-light" href="{% url 'dashboard:add_size' product.pk %}">
+                        Add Size
+                        </a>
+                    </p>
                     <p>
                         <a class="btn btn-light" href="{% url 'dashboard:edit_product' product.pk %}">Edit</a> 
                         <a class="btn btn-danger" href="{% url 'dashboard:remove_product' product.pk %}">Remove</a>

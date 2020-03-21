@@ -48,7 +48,7 @@ def register(request, utype=None):
                 new_user.is_superuser = True
                 new_user.is_staff = True
             new_user.save()
-            welcome_email.delay(new_user.email)
+            welcome_email.delay(new_user.id)
             raw_password = form.cleaned_data['password1']
             username = form.cleaned_data['username']
             user = authenticate(username=username, password=raw_password)

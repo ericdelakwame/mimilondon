@@ -4,7 +4,7 @@ from .views import (
     subcategories, categories, products, remove_category,
     remove_subcategory, edit_product, remove_product,
     new_home_video, home_video_detail, edit_home_video,
-    remove_home_video
+    remove_home_video, add_color, add_size, users
 ) 
 
 
@@ -12,6 +12,9 @@ app_name = 'dashboard'
 
 
 urlpatterns = [
+    url(r'^users/$', users, name='users'),
+    url(r'^add/size/(?P<product_pk>\d+)/$', add_size, name='add_size'),
+    url(r'^add/color/(?P<product_pk>\d+)/$', add_color, name='add_color'),
     url(r'^remove/home/video(?P<video_pk>\d+)/$', remove_home_video, name='remove_video'),
     url(r'^edit/home/video/(?P<video_pk>\d+)/$', edit_home_video, name='edit_home_video'),
     url(r'^new/home/video/$', new_home_video, name='new_home_video'),

@@ -1,1 +1,30 @@
-customer
+{% extends 'home/base.html' %}
+
+
+
+
+
+{% block content %}
+
+<div class="row container-fluid" style="margin-top: 80px;">
+    <div class="col-lg-3">
+        <div class="container">
+            
+            {% if request.user.is_authenticated %}
+                
+                {% if request.user.photo %}
+                    <p>
+                        <img src="{{request.user.photo.url}}" alt="" width="200px" height="200px">
+                    </p>
+                {% endif %}
+                <p class="h6 text-center">{{request.user}}</p>
+                <p class="h6 text-center">Last Seen: {{request.user.last_login}}</p>
+                    
+            {% endif %}
+                
+        </div>
+    </div>
+</div>
+    
+{% endblock content %}
+    

@@ -21,42 +21,36 @@ Check Out
                       <thead>
                         <tr class="text-center">
                               <th>Item</th>
-                              <th>Ghs</th>
+                              <th>$</th>
                               <th>Quantity</th>
-                              <th>Size</th>
-                              <th>Color</th>
+                              <th colspan="2">Sizes an colors</
                         </tr>
                         </thead>
                         
                         <tbody>                              
                         {% for item in cart %}
-                        <tr class="text-left text-capitalize">
+                        <tr class="text-center text-capitalize">
                               <td>{{item.product.name}}</td>
                               <td>{{item.product.price}}</td>
                               <td>{{item.quantity}}</td>
-                              <td>
-                              {% if item.product.sizes %}
-                                    
-                        {% for s in item.product.sizes.all %}
-                                    {{s.size}}           
-                                    {% endfor %}
-                                          
-                              {% endif %}
-                              </td> 
-                              <td>
-                              {% if item.product.colors %}
-                                    
-                        {% for c in item.product.colors.all   %}
-                                          {{c.color}}
-                                    {% endfor %}
-                                          
-                              {% endif %}
-                              </td>
+                                {% for p in options  %}
                               
-                                    
+                                    <!-- <th></th> -->
+                                    <!-- <th></th>
+                                    <th></th> -->
+                              <td class="h6">Size: {{p.size}}, {{p.color}}</td>
                               
+                        
+                                    
+                              {% endfor %}
+                                   
+                              {% endfor %} 
+                              
+                            
+                                    
+                                     
                         </tr>       
-                        {% endfor %}
+                      
                         </tbody>                     
                        
                 </table>

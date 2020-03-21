@@ -1,15 +1,15 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Category, SubCategory, Product
+from .models import Category, SubCategory, Product, Color, Size, Options
 from .forms import (
     CategoryForm, SubCategory, ProductForm, ColorForm,
-    SizeForm, ProductColorForm, ProductSizeForm
+    SizeForm, ProductColorForm, ProductSizeForm, OptionsForm
 )
 from cart.forms import CartAddProductForm
 from django.views.generic import ListView
 from functools import reduce
 from django.db.models import Q
 import operator
-from .models import Color, Size
+
 
 class ProductSearchView(ListView):
     template_name = 'shop/product_search.html'
@@ -47,40 +47,23 @@ def product_list(request, category_slug=None):
     })
 
 
-def product_detail(request, product_id):    
-    product = get_object_or_404(Product, pk=product_id, available=True)
-    colors = product.sizes.all()
-    sizes = product.colors.all()
-    if request.method == 'POST':
-        size_form = ProductSizeForm(request.POST, request.FILES, product=product)
-        color_form = ProductColorForm(request.POST, request.FILES, product=product)
-        if size_form.is_valid() and color_form.is_valid():
-            color = color_form.save(commit=False)
-            size = size_form.save(commit=False)
-            color.product = product
-            color.save()
-            size.product = product
-            size.save()
-    else:
-        size_form = ProductSizeForm()
-        color_form = ProductColorForm()
-    
-     # vendor = product.vendor
-        subcategory = product.sub_category
-        cart_product_form = CartAddProductForm(request.POST)
-        related_products = Product.objects.exclude(pk=product.pk).filter(sub_category=subcategory)
-    
+def product_detail(request, product_id):
+    product = get_object_or_404(Product, id=product_id, available=True)   
+    subcategory = product.sub_category
+    cart_product_form = CartAddProductForm(product)
+    related_products = Product.objects.exclude(pk=product.pk).filter(sub_category=subcategory)
     return render(request, 'shop/product_detail.html',
-                  {
-                      'product': product,
-                      'related_products': related_products,
-                      'cart_product_form': cart_product_form,
-                      'subcategory': subcategory,
-                      'size_form': size_form,
-                      'color_form': color_form,
-                     
-                      
-                  })
+
+            {
+                'product': product,
+                'related_products': related_products,
+                'cart_product_form': cart_product_form,
+                'subcategory': subcategory,
+                                            
+            })
+
+
+
 
 
 def categories(request):
@@ -115,4 +98,11 @@ def subcategory_detail(request, subcategory_pk):
         'categories': categories,
         'products': products,
 
+    })
+
+
+def category_info(request, category_pk):
+    category = get_object_or_404(Category, pk=category_pk)
+    return render(request, 'shop/category_detail.html', {
+        'category': category
     })

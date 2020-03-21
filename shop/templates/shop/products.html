@@ -35,38 +35,46 @@ Products
                         {{product.name|capfirst}}
                     </h5>
                     
-                    {% if product.colors %}
-                    <h5 class="alert alert- text-center">
-                        Colors
-                    </h5>
-                    {% for c in product.colors.all %}
-                      <nav >
-                        <li class="breadcrumb-item text-center font-weight-light">
-                            {{c.color|capfirst}},
-                        </li>
-                    </nav>
-                    {% endfor %}           
-                    {% endif %}
-
-                      {% if product.sizes %}
-                    <h5 class="alert alert-heading text-center">
-                        Sizes
-                    </h5>
-                    {% for p in product.sizes.all %}
-                    <nav >
-                        <li class="breadcrumb-item text-center font-weight-light">
-                            {{p.size|capfirst}},
-                        </li>
-                    </nav>
-                        
-                    {% endfor %}           
-                    {% endif %}
-
+                    {% if product.sizes %}
                     
-                    <h5 class="text-center">$ {{product.price}}</h5>
-                    <h5 class="text-center">Stock: {{product.stock}}</h5>
-                    <p class="text-center">
-                        <a class="btn btn-light btn-outline-dark" href="{% url 'shop:product_detail' product.id %}">View</a>
+                   <table class="table table-responsive-md table-responsive-sm">
+                       <thead>
+                           <tr>
+                            <th style="font-size: 12px;">Sizes</th> 
+                            {% for s in product.sizes.all %}
+                               
+                                   <th style="font-size: 12px;">{{s.size}}</th>
+    
+                           {% endfor %}
+
+                           </tr>           
+                       </thead> 
+                       
+                    </table>      
+                    {% endif %}
+                   
+                    {% if product.colors %}
+                      <table class="table">
+                       <thead>
+                           <tr>
+                            <th style="font-size: 12px;">Colors</th> 
+                            {% for c in product.colors.all %}
+                               
+                                   <th style="font-size: 12px;">{{c.color}}</th>
+    
+                           {% endfor %}
+
+                           </tr>           
+                       </thead> 
+                       
+                    </table>      
+                    {% endif %}
+                        
+                    
+                    <h6 class="text-info">$ {{product.price}}</h6>
+                    <h6 class="text-info">Stock: {{product.stock}}</h6>
+                    <p class="text-info">
+                        <a class="btn btn-info" href="{{product.get_absolute_url}}">View</a>
                     </p>
                     
                 </div>

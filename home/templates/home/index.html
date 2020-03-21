@@ -51,7 +51,7 @@
         <div class="row border-responsive">
           <div class="col-md-6 col-lg-3 mb-4 mb-lg-0 border-right" data-aos="fade-up" data-aos-delay="">
             <div class="text-center">
-             <img src="/static/home/images/men1.png" alt="" height="200px" width="200px">
+             <img src="/static/home/images/men/men1.png" alt="" height="200px" width="200px">
               <h3 class="text-uppercase h4 mb-3"> <a href="{% url 'shop:categories' %}">Men</a> </h3>
               <p> All styles and colors for men available in the shop</p>
             </div>
@@ -106,8 +106,8 @@
                     
              
               <div class="media-image-body">
-                <h2 class="font-secondary text-uppercase"><a href="{{product.get_absolute_url}}">{{product.name}}</a></h2>
-                <span class="d-block mb-3">{{product.sub_category.name}} &mdash; {{product.sub_category.category.name}}</span>
+                <h2 class="font-secondary text-uppercase"><a href="{{product.get_absolute_url}}">{{product.name|capfirst}}</a></h2>
+                <span class="d-block mb-3">{{product.sub_category.name|capfirst}} &mdash; {{product.sub_category.category.name|capfirst}}</span>
                 <p>$ {{product.price}}</p>
  
                 <p><a href="{{product.get_absolute_url}}">View</a></p>
@@ -182,13 +182,12 @@ We bring a new level of diversity and exciting styles that best represent your p
                 
                 {% if p.image %}
                   <img src="{{p.image.url}}" alt="Image" width="80%" height="200px">
-                {% endif %}
-                  
+                {% endif %}                  
                 
                 <div class="media-image-body">
-                  <h2 class="font-secondary text-uppercase">{{p.name}}</h2>
-                  <p>{{p.description}}</p>
-                  <p><a href="#" class="btn btn-primary text-white px-4">Learn More</a></p>
+                  <h2 class="font-secondary text-uppercase">{{p.name|capfirst}}</h2>
+                  <p>{{p.description|capfirst}}</p>
+                  <p><a href="{{p.get_absolute_url}}" class="btn btn-primary text-white px-4">VIEW</a></p>
                 </div>
               </div>
               {% else %}
@@ -200,9 +199,9 @@ We bring a new level of diversity and exciting styles that best represent your p
                   
                 
                 <div class="media-image-body">
-                  <h2 class="font-secondary text-uppercase">{{p.name}}</h2>
-                  <p>{{p.description}}</p>
-                  <p><a href="#" class="btn btn-primary text-white px-4">Learn More</a></p>
+                  <h2 class="font-secondary text-uppercase">{{p.name|capfirst}}</h2>
+                  <p>{{p.description|capfirst}}</p>
+                  <p><a href="{{p.get_absolute_url}}" class="btn btn-primary text-white px-4">View</a></p>
                 </div>
               </div>
               {% endif %}
@@ -378,7 +377,7 @@ We bring a new level of diversity and exciting styles that best represent your p
              
               <div class="media-image-body">
                 <h2 class="font-secondary text-uppercase"><a href="{{post.get_absolute_url}}">{{post.title}}</a></h2>
-                <span class="d-block mb-3">By {{post.author.first_name}} &mdash; {{post.title}}</span>
+                <span class="d-block mb-3">By {{post.author.first_name|capfirst}} &mdash; {{post.title|capfirst}}</span>
                 <p>{{post.sub_title}}</p>
                 <p><a href="{{post.get_absolute_url}}">Read More</a></p>
               </div>

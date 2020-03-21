@@ -1,0 +1,105 @@
+{% extends 'shop/base.html' %}
+{% load crispy_forms_tags %}
+
+
+{% block title %}
+mimilonglamour
+{% endblock title %}
+
+
+
+
+{% block content %}
+
+
+<div class="row container-fluid">
+    <div class="col-lg-6">
+        
+        {% if product_options %}
+        <h6>You Chose Color: {{product_options.color}}, Size: {{product_options.size}}</h6>
+        {% else %}
+        <form action="" method="POST" enctype="multipart/form-data">
+            <h5>Choose options for {{product.name}}</h5>
+            {% csrf_token %}
+            {{form|crispy}}
+            <p>
+                <button class="btn btn-info" type="submit">
+                    Ok
+                </button></p>
+        </form>
+            
+        {% endif %}
+            
+
+        {% if product.image %}
+        <p>
+            <img src="{{product.image.url}}" alt="" width="80%" height="300px">
+        </p>
+        <h2 class="alert alert-light text-center font-italic">{{product.name|capfirst}}</h2>
+        
+            
+            
+       
+        
+        <div class="container">
+            <form action="{% url 'cart:cart_add' product.id %}"  method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                {{cart_product_form|crispy}}
+                
+                <p class="text-center">
+                <button class="btn btn-info" type="submit">
+                    Add to cart
+                </button>
+                </p>
+            </form>
+           
+        </div>
+
+        
+
+        {% endif %}
+
+    </div>
+    <div class="col-lg-6"> 
+        
+        {% if product.image1 %}
+            <h5 class="alert alert-link text-center">Gallery for {{product.name}}</h5>
+        {% endif %}
+                     
+           
+                
+        <div class="container">
+             {% if product.image1 %}
+           
+                 <p id="gallery" class="text-center">
+                    <img src="{{product.image1.url}}" alt="" width="80%" height="200px">
+                </p>
+             </div>      
+            {% endif %}
+             {% if product.image2 %}
+                <p id="gallery" class="text-center">
+                    <img src="{{product.image2.url}}" alt="" width="80%" height="200px">
+                </p>
+            {% endif %}
+             {% if product.image3 %}
+                <p id="gallery" class="text-center">
+                    <img src="{{product.image3.url}}" alt="" width="80%" height="200px">
+                </p>
+            {% endif %}
+        </div>
+        
+            
+        
+    </div>
+</div>
+
+
+
+{% endblock content %}
+
+
+
+{% block footer %}
+    
+{% endblock footer %}
+    

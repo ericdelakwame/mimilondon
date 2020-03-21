@@ -3,8 +3,8 @@ from django.contrib.auth.decorators import login_required
 from trending.models import Post
 from trending.forms import PostForm
 from shop.forms import (
-    ProductForm, CategoryForm, SubCategoryForm, ColorForm,
-    SizeForm
+    CategoryForm, SubCategoryForm, ColorForm,
+    SizeForm, ProductColorForm, ProductSizeForm
 )
 from shop.models import (
     SubCategory, Category, Product, Size,
@@ -13,7 +13,14 @@ from shop.models import (
 from django.forms import modelformset_factory
 from home.models import HomeVideo
 from home.forms import HomeVideoForm
+from .forms import NewProductForm
+from accounts.models import User
 
+def users(request):
+    users = User.objects.all()
+    return render(request, 'dashboard/users.html', {
+        'users': users
+    })
 
 
 @login_required
@@ -69,27 +76,28 @@ def new_product(request, subcategory_pk):
     subcategories = SubCategory.objects.order_by('-name')
 
     if request.method == 'POST':   
-        form = ProductForm(request.POST, request.FILES)
+        form = NewProductForm(request.POST, request.FILES)
         color_formset = ColorFormSet(request.POST, request.FILES)
         size_formset = SizeFormSet(request.POST, request.FILES)
         if form.is_valid() and color_formset.is_valid() and size_formset.is_valid():
             product = form.save(commit=False)
+            product.sub_category = subcategory
+            product = form.save()
             colors = color_formset.save(commit=False)
             sizes = size_formset.save(commit=False)
             product.sub_category = subcategory
-            product.save()
-            for i in colors:
-                i.product = product
-                i.save()
-            for i in sizes:
-                i.product = product
-                i.save()
-          
+            for c in colors:
+                c.save()
+                product.colors.add(c)
+
+            for s in sizes:
+                s.save()
+                product.sizes.add(s)          
             return redirect('dashboard:products')
     else:
-        form = ProductForm()
-        color_formset = ColorFormSet(queryset=Color.objects.none())
-        size_formset = SizeFormSet(queryset=Size.objects.none())
+        form = NewProductForm()
+        color_formset = ColorFormSet(queryset=Color.objects.all())
+        size_formset = SizeFormSet(queryset=Size.objects.all())
     return render(request, 'dashboard/categories.html', {
         'form': form,
         'subcategory': subcategory,
@@ -212,3 +220,35 @@ def remove_home_video(request, video_pk):
     video = get_object_or_404(HomeVideo, pk=video_pk)
     video.delete()
     return redirect('dashboard:index')
+
+
+def add_color(request, product_pk):
+    product = get_object_or_404(Product, pk=product_pk)
+    if request.method == 'POST':
+        form = ProductColorForm(request.POST, request.FILES)
+        if form.is_valid():
+            color, created = Color.objects.get_or_create(color=form.cleaned_data['color'])
+            product.colors.add(color)
+            return redirect('dashboard:products')
+    else:
+        form = ProductColorForm()
+    return render(request, 'dashboard/forms/color_form.html', {
+        'form': form,
+        'product': product,
+    })
+
+
+def add_size(request, product_pk):
+    product = get_object_or_404(Product, pk=product_pk)
+    if request.method == 'POST':
+        form = ProductSizeForm(request.POST, request.FILES)
+        if form.is_valid():
+            size, created = Size.objects.get_or_create(size=form.cleaned_data['size'])
+            product.sizes.add(size)
+            return redirect('dashboard:products')
+    else:
+        form = ProductSizeForm()
+    return render(request, 'dashboard/forms/size_form.html', {
+        'form': form,
+        'product': product,
+    })

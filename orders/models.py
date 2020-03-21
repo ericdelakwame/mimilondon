@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.gis.db.models import PointField
-from shop.models import Product, Size, Color
+from shop.models import Product, Options
 from accounts.models import  Customer
 import datetime
 from django.utils import timezone
@@ -37,13 +37,11 @@ class Order(models.Model):
 
 class OrderItem(models.Model):
     customer = models.ForeignKey(Customer, related_name='order_items', on_delete=models.CASCADE, null=True)
-    # vendor = models.ForeignKey(Vendor, related_name='order_items', on_delete=models.CASCADE, null=True)
     order = models.ForeignKey(Order, related_name='items')
     product = models.ForeignKey(Product, related_name='order_items')
     price = models.DecimalField(max_digits=10, decimal_places=2)
     quantity = models.PositiveIntegerField(default=1)
-    size = models.ForeignKey(Size, related_name='order_items', on_delete=models.CASCADE, null=True)
-    color = models.ForeignKey(Color, related_name='order_items', on_delete=models.CASCADE, null=True)
+    options = models.ForeignKey(Options, related_name='orders', null=True, on_delete=models.CASCADE)
 
 
   

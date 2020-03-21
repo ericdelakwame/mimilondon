@@ -1,0 +1,48 @@
+{% extends 'dashboard/base.html' %}
+
+
+
+
+{% block content %}
+
+<div class="row container-fluid">
+    <div class="container jumbotron">
+        <div class="col-lg-12">
+            <h4 class="alert alert-dark text-center">
+                {{users.count}} Registered User{{users.count|pluralize}}
+            </h4>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                        <th>Tel No</th>
+                        <th>City</th>
+                        <th>Country</th>
+                        <th>Last Seen On MLG</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    {% for user in users %}
+                        <tr>
+                            <td>{{user.first_name|capfirst}}</td>
+                            <td>{{user.last_name|capfirst}}</td>
+                            <td>{{user.email}}</td>
+                            <td>{{user.tel_no.as_e164}}</td>
+                            <td>{{user.city|capfirst}}</td>
+                            <td>{{user.country|capfirst}}</td>
+                            <td>{{user.last_login}}</td>
+                        </tr>
+                    {% endfor %}
+                        
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+    
+{% endblock content %}
+    
