@@ -3,7 +3,7 @@ astroid==2.3.3
 autopep8==1.5
 Babel==2.8.0
 billiard==3.6.3.0
-celery==4.4.1
+celery==5.2.2
 Django==1.11.20
 django-crispy-forms==1.9.0
 django-leaflet==0.26.0
